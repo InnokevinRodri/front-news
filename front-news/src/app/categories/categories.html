@@ -1,0 +1,83 @@
+<div class="page-content">
+  <h2>📂 AI News Categories</h2>
+  
+  <div class="search-bar">
+    <input 
+      type="text" 
+      placeholder="🔍 Search categories..."
+      [(ngModel)]="searchTerm"
+      class="search-input">
+  </div>
+
+  <div class="categories-container">
+    <div class="categories-grid">
+      <div 
+        *ngFor="let category of getFilteredCategories()" 
+        class="category-card"
+        [style.border-color]="category.color"
+        (click)="selectCategory(category)">
+        
+        <div class="category-header">
+          <span class="category-icon">{{ category.icon }}</span>
+          <span *ngIf="category.trending" class="trending-badge">🔥 Trending</span>
+        </div>
+        
+        <h3>{{ category.name }}</h3>
+        <p class="category-description">{{ category.description }}</p>
+        
+        <div class="category-stats">
+          <div class="stat">
+            <span class="stat-value">{{ category.articleCount }}</span>
+            <span class="stat-label">Articles</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">Today</span>
+            <span class="stat-label">Updated</span>
+          </div>
+        </div>
+        
+        <div class="category-action">
+          <button class="explore-btn" [style.background]="category.color">
+            Explore →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedCategory" class="selected-category-detail">
+      <div class="detail-header" [style.background]="selectedCategory.color">
+        <span class="detail-icon">{{ selectedCategory.icon }}</span>
+        <h3>{{ selectedCategory.name }}</h3>
+        <button class="close-btn" (click)="selectedCategory = null">✕</button>
+      </div>
+      
+      <div class="detail-content">
+        <p>{{ selectedCategory.description }}</p>
+        
+        <h4>Recent Articles in {{ selectedCategory.name }}</h4>
+        <ul class="article-list">
+          <li>Latest breakthrough in {{ selectedCategory.name }} technology</li>
+          <li>How {{ selectedCategory.name }} is reshaping the industry</li>
+          <li>Top 10 {{ selectedCategory.name }} developments this month</li>
+          <li>Expert insights on {{ selectedCategory.name }} trends</li>
+        </ul>
+        
+        <div class="detail-stats">
+          <div class="stat-item">
+            <strong>{{ selectedCategory.articleCount }}</strong> Total Articles
+          </div>
+          <div class="stat-item">
+            <strong>24</strong> New This Week
+          </div>
+          <div class="stat-item">
+            <strong>89%</strong> Reader Engagement
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="categories-footer">
+    <p>💡 <strong>Tip:</strong> Click on any category to explore recent articles and trending topics in that domain.</p>
+  </div>
+</div>
