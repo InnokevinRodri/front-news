@@ -1,0 +1,65 @@
+<div class="page-content">
+  <h2>🔥 Trending in AI</h2>
+  
+  <div class="time-selector">
+    <button 
+      [class.active]="selectedTimeRange === '1h'"
+      (click)="changeTimeRange('1h')">
+      Last Hour
+    </button>
+    <button 
+      [class.active]="selectedTimeRange === '24h'"
+      (click)="changeTimeRange('24h')">
+      Last 24 Hours
+    </button>
+    <button 
+      [class.active]="selectedTimeRange === '7d'"
+      (click)="changeTimeRange('7d')">
+      Last Week
+    </button>
+    <button 
+      [class.active]="selectedTimeRange === '30d'"
+      (click)="changeTimeRange('30d')">
+      Last Month
+    </button>
+  </div>
+
+  <div class="trending-grid">
+    <div 
+      *ngFor="let topic of trendingTopics" 
+      class="trend-card"
+      [class.hot]="topic.trendScore >= 90"
+      [class.warm]="topic.trendScore >= 70 && topic.trendScore < 90">
+      
+      <div class="trend-header">
+        <span class="trend-icon">{{ topic.icon }}</span>
+        <div class="trend-score">
+          <span class="score-value">{{ topic.trendScore }}</span>
+          <span class="score-label">Trend Score</span>
+        </div>
+      </div>
+      
+      <h3>{{ topic.title }}</h3>
+      
+      <div class="trend-meta">
+        <span class="category">{{ topic.category }}</span>
+        <span class="article-count">{{ topic.articleCount }} articles</span>
+      </div>
+      
+      <div class="trend-indicator">
+        <div class="trend-bar">
+          <div 
+            class="trend-fill" 
+            [style.width.%]="topic.trendScore"
+            [class]="getTrendColor(topic.trendScore)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trending-insights">
+    <h3>📊 AI Trend Insights</h3>
+    <p>Large Language Models continue to dominate the AI news cycle, with increasing focus on regulation and ethical considerations. Open source initiatives are gaining momentum.</p>
+  </div>
+</div>
